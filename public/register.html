@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel ="shortcut icon" type="image/x-icon" href="static/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="http://unpkg.com/view-design/dist/styles/iview.css">
+  <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+  <script type="text/javascript" src="http://unpkg.com/view-design/dist/iview.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .banner {
+      width: 480px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .title {
+      font-size: 44px;
+      margin-bottom: 20px;
+    }
+
+    .slogn {
+      font-size: 28px;
+      margin-bottom: 64px;
+      line-height: 1.2;
+      color: #333;
+    }
+
+    .form {
+      width: 478px;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%) !important;
+      left: 40%;
+      transform: translateX(-50%);
+    }
+
+    .ivu-input {
+      border-color: #aaa;
+      text-align: left;
+      font-size: 20px;
+      height: 50px;
+      line-height: 50px;
+      padding: 0 20px;
+      border-radius: 4px;
+      color: black;
+    }
+
+    .ivu-btn {
+      height: 50px;
+      line-height: 50px;
+      font-size: 24px;
+      font-weight: lighter;
+      color: #fff;
+    }
+
+    button[disabled],
+    button:disabled,
+    button.disabled {
+      -webkit-text-fill-color: #fff;
+      -webkit-opacity: 1;
+      opacity: 0.8;
+      background-color: #499BF2 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <Row>
+      <i-col :xs="0" :sm="0" :md="0" :lg="9" flex="none">
+        <div class="banner" :style="{backgroundImage: 'url(' + dataList[currentIndex] + ')',height: height+'px'}">
+        </div>
+      </i-col>
+      <i-col :xs="24" :sm="24" :md="24" :lg="15">
+        <div class="form">
+          <p class="title">欢迎注册WeChat</p>
+          <p class="slogn">欢乐聊天，爽快怡夏</p>
+          <div  v-if="registerNums!=0" style="font-size: 18px;">
+            恭喜您注册成功，成为第 <span style="color: #2D8CF0; font-size: 26px;">{{registerNums}}</span> 位会员 感谢您！
+            <a type="primary" href="http://y2725078j3.qicp.vip" target="_blank" style="height: 20px;line-height: 20px;display: block;margin-top: 50px;"><span style="margin-right: 5px;">立即登录</span><Icon type="ios-arrow-forward" ></a>
+          </div>
+          <i-form v-if="registerNums==0" class="formItem" ref="formItem" :model="formItem" :rules="formRules">
+            <form-item prop="username">
+              <i-input size="large" type="text" v-model="formItem.username" placeholder="账号">
+              </i-input>
+            </form-item>
+            <form-item prop="nickname">
+              <i-input size="large" type="text" v-model="formItem.nickname" placeholder="昵称">
+              </i-input>
+            </form-item>
+            <form-item prop="password">
+              <i-input size="large" type="password" v-model="formItem.password" password placeholder="密码">
+              </i-input>
+            </form-item>
+            <form-item prop="email">
+              <i-input size="large" type="text" v-model="formItem.email" placeholder="邮箱">
+              </i-input>
+            </form-item>
+            <Row :gutter="16">
+              <i-col span="9">
+                <form-item prop="code">
+                  <i-input size="large" type="text" v-model="formItem.code" placeholder="邮件验证码">
+                  </i-input>
+                </form-item>
+              </i-col>
+              <i-col span="15">
+                <i-button type="primary" v-bind:disabled="waitTimes!=60"
+                  v-text="waitTimes==60?'发送邮件验证码':waitTimes+' S后重试'" size="large" @click="sendCode()" long>
+                </i-button>
+              </i-col>
+            </Row>
+            <form-item>
+              <i-button type="primary" size="large" @click="handleSubmit('formItem')" long>立即注册</i-button>
+            </form-item>
+          </i-form>
+          <div style="height: 50px;">
+
+          </div>
+        </div>
+      </i-col>
+    </Row>
+  </div>
+
+  <script>
+    const validateEmail = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('邮箱不能为空'));
+      }
+      axios.get("http://127.0.0.1:8088/chat/account/emailExit?email=" + value)
+        .then(res => {
+          if (res.data.data) {
+            return callback(new Error('邮箱已存在'));
+          } else {
+            callback();
+          }
+        })
+    };
+    const validateUserName = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('账号不能为空'));
+      }
+      let regNum = /^.{5,11}$/;
+      if (!regNum.test(value)) {
+        return callback(new Error('账号长度范围 5-11'));
+      }
+      axios.get("http://127.0.0.1:8088/chat/account/usernameExit?username=" + value)
+        .then(res => {
+          if (res.data.data) {
+            return callback(new Error('账号已存在'));
+          } else {
+            callback();
+          }
+        })
+    };
+    new Vue({
+      el: '#app',
+      data: {
+        height: null,
+        dataList: ["https://cdn-go.cn/qq-web/zc.qq.com/latest/v3/img/01-1.jpg",
+          "https://cdn-go.cn/qq-web/zc.qq.com/latest/v3/img/01-2.jpg",
+          "https://cdn-go.cn/qq-web/zc.qq.com/latest/v3/img/01-3.jpg",
+          "https://cdn-go.cn/qq-web/zc.qq.com/latest/v3/img/01-4.jpg"
+        ],
+        currentIndex: 0, //默认显示图片
+        timer: null, //定时器
+        waitTimes: 60,
+        registerNums: 0,
+        formRules: {
+          username: [{
+            required: true,
+            message: '账号不可以为空',
+            trigger: 'blur'
+          }, {
+            type: 'number',
+            message: '账号只能为数字',
+            transform(value) {
+              return Number(value);
+            }
+          }, {
+            validator: validateUserName,
+            trigger: 'blur'
+          }],
+          password: [{
+            required: true,
+            message: '密码不可以为空',
+            trigger: 'blur'
+          }],
+          nickname: [{
+            required: true,
+            message: '昵称不可以为空',
+            trigger: 'blur'
+          }],
+          email: [{
+            required: true,
+            message: '邮箱不可以为空',
+            trigger: 'blur'
+          }, {
+            type: 'email',
+            message: '邮箱格式错误',
+            trigger: 'blur'
+          }, {
+            validator: validateEmail,
+            trigger: 'blur'
+          }],
+          code: [{
+            required: true,
+            message: '验证码不可为空',
+            trigger: 'blur'
+          }, {
+            type: 'number',
+            message: '验证码只能数字',
+            trigger: 'blur',
+            transform(value) {
+              return Number(value);
+            }
+          }],
+        },
+        formItem: {
+          username: null,
+          password: null,
+          nickname: null,
+          email: null,
+          code: null,
+        }
+      },
+      beforeMount() {
+        this.height = document.documentElement.clientHeight;
+      },
+      created() {
+        this.runInv();
+        let waitTImes = localStorage.getItem("waitTimes");
+        if (waitTImes != null) {
+          this.waitTimes = waitTimes;
+          this.sendCodeTime();
+        }
+      },
+      methods: {
+        //定时器
+        runInv() {
+          this.intervalId = setInterval(() => {
+            this.gotoPage(this.nextIndex())
+          }, 5000);
+        },
+        sendCodeTime() {
+          let waitTimes = localStorage.setItem("waitTimes", this.waitTimes);
+          this.timer = setInterval(() => {
+            this.waitTimes--;
+            if (this.waitTimes == 0) {
+              this.waitTimes = 60;
+              localStorage.removeItem("waitTimes");
+              clearInterval(this.timer)
+            }
+          }, 1000)
+        },
+        gotoPage(index) {
+          this.currentIndex = index;
+        },
+        //上一张
+        prevIndex() {
+          if (this.currentIndex == 0) {
+            return this.dataList.length - 1;
+          } else {
+            return this.currentIndex - 1;
+          }
+        },
+        //下一张
+        nextIndex() {
+          if (this.currentIndex == this.dataList.length - 1) {
+            return 0;
+          } else {
+            return this.currentIndex + 1;
+          }
+        },
+        handleSubmit(name) {
+          this.$refs[name].validate((valid) => {
+            if (valid) {
+              axios.post("http://127.0.0.1:8088/chat/account/registerAccount", this.formItem)
+                .then(res => {
+                  this.alertMsg("info", res.data.msg);
+                  this.registerNums = res.data.data;
+                }).catch(function (err) {
+                  this.alertMsg("error", res.data.msg);
+                });
+            }
+          })
+        },
+        sendCode() {
+          if (this.waitTimes != 60) {
+            return;
+          }
+          if (this.formItem.email == null || !this.formItem.email.match(/^\w+@\w+\.\w+$/i)) {
+            return;
+          }
+          let data = new FormData();
+          data.append('emailAddress', this.formItem.email);
+          axios.post("http://127.0.0.1:8088/chat/email/sendVerCode", data)
+            .then(res => {
+              this.alertMsg("info", res.data.msg);
+              this.sendCodeTime();
+            })
+        },
+        // 提示
+        alertMsg(type, content) {
+          this.$Message[type]({
+            background: true,
+            content: content
+          });
+        },
+        // 根据表名获取表数据
+        getTableByName(name, tableList) {
+          return tableList.find(item => item.name === name)
+        }
+      },
+      mounted: function () {}
+    })
+  </script>
+</body>

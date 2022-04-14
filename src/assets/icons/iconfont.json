@@ -1,0 +1,107 @@
+{
+  "id": "2790053",
+  "name": "vuechat",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "25777244",
+      "name": "edit",
+      "font_class": "edit",
+      "unicode": "e514",
+      "unicode_decimal": 58644
+    },
+    {
+      "icon_id": "25458489",
+      "name": "warn",
+      "font_class": "warn",
+      "unicode": "e513",
+      "unicode_decimal": 58643
+    },
+    {
+      "icon_id": "25182025",
+      "name": "file",
+      "font_class": "file",
+      "unicode": "e512",
+      "unicode_decimal": 58642
+    },
+    {
+      "icon_id": "25080143",
+      "name": "img",
+      "font_class": "img",
+      "unicode": "e510",
+      "unicode_decimal": 58640
+    },
+    {
+      "icon_id": "25080144",
+      "name": "emoji",
+      "font_class": "emoji",
+      "unicode": "e511",
+      "unicode_decimal": 58641
+    },
+    {
+      "icon_id": "24909999",
+      "name": "add",
+      "font_class": "add",
+      "unicode": "e509",
+      "unicode_decimal": 58633
+    },
+    {
+      "icon_id": "24715226",
+      "name": "max",
+      "font_class": "window-max",
+      "unicode": "e501",
+      "unicode_decimal": 58625
+    },
+    {
+      "icon_id": "24715227",
+      "name": "ding",
+      "font_class": "window-ding",
+      "unicode": "e502",
+      "unicode_decimal": 58626
+    },
+    {
+      "icon_id": "24715228",
+      "name": "min",
+      "font_class": "window-min",
+      "unicode": "e503",
+      "unicode_decimal": 58627
+    },
+    {
+      "icon_id": "24710152",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e504",
+      "unicode_decimal": 58628
+    },
+    {
+      "icon_id": "24462922",
+      "name": "account",
+      "font_class": "account",
+      "unicode": "e505",
+      "unicode_decimal": 58629
+    },
+    {
+      "icon_id": "24462928",
+      "name": "password",
+      "font_class": "password",
+      "unicode": "e506",
+      "unicode_decimal": 58630
+    },
+    {
+      "icon_id": "24106461",
+      "name": "三",
+      "font_class": "san",
+      "unicode": "e507",
+      "unicode_decimal": 58631
+    },
+    {
+      "icon_id": "24106460",
+      "name": "more",
+      "font_class": "more",
+      "unicode": "e508",
+      "unicode_decimal": 58632
+    }
+  ]
+}

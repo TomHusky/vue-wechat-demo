@@ -27,19 +27,19 @@ gitee:  https://gitee.com/luowenjie98/vue-wechat-demo
 
 
 #### 好友侧边栏
-![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172058840-1121290990.png)
+![image](https://user-images.githubusercontent.com/48705045/175520263-cf8dd72a-b07c-487f-acff-5636868449e1.png)
 
 #### 群聊侧边栏
-![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172144945-638329693.png)
+![image](https://user-images.githubusercontent.com/48705045/175520283-a1ffde86-4661-49f4-a05d-6d02bad1900e.png)
 
 #### 表情 文件 图片 消息
 ![image](https://user-images.githubusercontent.com/48705045/175520014-517656da-90f7-4e69-bdba-816262649a2f.png)
 
 #### 图片放大预览
-![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172410733-1642329213.png)
+![image](https://user-images.githubusercontent.com/48705045/175520306-32010674-f0e4-4207-a5b4-cd3478967863.png)
 
 #### 通讯录
-![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172441516-1926363119.png)
+![image](https://user-images.githubusercontent.com/48705045/175520326-8579f9b1-620a-403c-bf59-bed065ec6198.png)
 
 #### 信息弹出框
 ![image](https://user-images.githubusercontent.com/48705045/175520091-556e7986-521e-4f89-bb1a-92ecf1af9f17.png)

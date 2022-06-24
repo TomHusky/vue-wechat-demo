@@ -61,7 +61,6 @@ export default {
     send() {
       let friend = this.selectedFriend;
       let msg = this.getChatByChatId(friend.username);
-      console.log(friend,msg);
       if (!msg) {
         this.$store.dispatch("friend/selectFriend", friend.username);
         let chat = {

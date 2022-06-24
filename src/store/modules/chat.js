@@ -46,43 +46,26 @@ const state = {
       isShow: true,
       lastMsgTime: new Date(1637131427000),
       messages: [{
-          self: false,
           type: 1,
           content: '我已经通过你的好友请求，现在可以开始聊天了',
           date: new Date(1636955087000),
           showTime: true
         }, {
-          self: true,
-          type: 1,
-          content: 'hello 我叫麻花藤',
-          date: new Date(1636955087000),
-          showTime: false
-        }, {
-          self: false,
           type: 1,
           content: '你好，我是老胡',
           date: new Date(1636955087000),
           showTime: false
         }, {
-          self: false,
           type: 1,
           content: '我嚓！你这个做的可以哦',
           date: new Date(1637214287000),
           showTime: true
         }, {
-          self: false,
           type: 1,
           content: '6666',
           date: new Date(1637131427000),
           showTime: false
-        },
-        {
-          self: true,
-          type: 1,
-          content: '哈哈哈哈，还行吧@::tt;;@1cb4c147d8565bf1c1c59773c99f3fb7@',
-          date: new Date(1637131427000),
-          showTime: false
-        },
+        }
       ]
     },
     {
@@ -101,19 +84,16 @@ const state = {
       isShow: true,
       lastMsgTime: new Date(),
       messages: [{
-        self: false,
         type: 1,
         content: '我已经通过你的好友请求，现在可以开始聊天了',
         date: new Date(1637131427000),
         showTime: true
       }, {
-        self: false,
         type: 1,
         content: '老哥，赶紧上号',
         date: new Date(1637131487000),
         showTime: false
       }, {
-        self: false,
         type: 2,
         content: {
           width: 1922,
@@ -181,13 +161,7 @@ const state = {
         content: '老哥，赶紧上号',
         date: new Date(1637131487000),
         showTime: false
-      }, {
-        username: "1486842355",
-        type: 1,
-        content: '老哥，赶紧上号',
-        date: new Date(1637131487000),
-        showTime: false
-      },]
+      }]
     }
   ],
   // 得知当前选择的是哪个对话
@@ -205,8 +179,6 @@ const mutations = {
   selectSession(state, value) {
     state.selectChatId = value;
     let chat = state.chatlist.find(session => session.chatId === value);
-    console.log(value);
-    console.log(state.chatlist);
     chat.newMsgNum = 0;
     chat.isShow = true;
   },

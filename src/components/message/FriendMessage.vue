@@ -30,13 +30,21 @@
           <div class="time selectNone">
             <span v-if="item.showTime">{{ item.date | time }}</span>
           </div>
-          <div class="main" :class="{ self: isSelf(item.username), other: !isSelf(item.username) }">
+          <div
+            class="main"
+            :class="{
+              self: isSelf(item.username),
+              other: !isSelf(item.username),
+            }"
+          >
             <img
               class="avatar selectNone"
               width="36"
               height="36"
               @click.prevent="openMenu($event, item)"
-              :src="isSelf(item.username) ? user.avatar : selectedChat.info.avatar"
+              :src="
+                isSelf(item.username) ? user.avatar : selectedChat.info.avatar
+              "
             />
             <div class="content" :class="{ 'text-msg': item.type == 1 }">
               <img
@@ -65,7 +73,6 @@
                       ? systemFileIcon[item.content.fileType]
                       : 'static/images/file.png'
                   "
-                  style="width: 40px"
                 />
               </div>
               <div
@@ -351,7 +358,6 @@ export default {
           height: 0;
           content: '';
           border: solid transparent;
-          border-right-color: #FFFFFF;
         }
       }
 
@@ -370,6 +376,7 @@ export default {
         width: 200px;
         cursor: pointer;
         position: relative;
+        background-color: #fff;
 
         &:hover {
           border: 1px solid #E7E7E7;
@@ -382,7 +389,6 @@ export default {
           height: 0;
           content: '';
           border: solid transparent;
-          border-right-color: #FFFFFF;
         }
 
         .file-name {

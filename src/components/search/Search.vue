@@ -41,7 +41,7 @@ export default {
     change() {
       this.$emit("change", this.content);
     },
-    search(){
+    search() {
       this.$emit("search", this.content);
     },
     inputFocus(e) {
@@ -85,18 +85,19 @@ export default {
 <style lang="stylus" scoped>
 .search-wrapper {
   padding: 22px 12px 12px 12px;
-  background-color: #f7f7f7;
+  // background-color: #f7f7f7;
   display: flex;
 }
 
-.btn{
-  margin-left: 30px;
+.btn {
+  margin-left: 20px;
   width: 50px;
   background-color: #1AAD19;
   border: none;
   color: #fff;
   font-size: 12px;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 .search {
@@ -150,5 +151,4 @@ export default {
     cursor: pointer;
   }
 }
-
 </style>

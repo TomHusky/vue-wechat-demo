@@ -52,9 +52,6 @@ gitee:  https://gitee.com/luowenjie98/vue-wechat-demo
 
 
 
-
-
-
 ## 项目启动
 
 

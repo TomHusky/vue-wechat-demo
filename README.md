@@ -20,11 +20,11 @@ gitee:  https://gitee.com/luowenjie98/vue-wechat-demo
 
 #### 登录页面
 
-![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624171938554-2045343273.png)
+![image](https://user-images.githubusercontent.com/48705045/175519803-c012d26c-1866-443d-b203-8fe26acb04be.png)
 
 #### 主页面
+![image](https://user-images.githubusercontent.com/48705045/175519972-1eaa6605-9579-4b75-8617-147d596e9c5e.png)
 
-![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172008766-1800647877.png)
 
 #### 好友侧边栏
 ![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172058840-1121290990.png)
@@ -33,7 +33,7 @@ gitee:  https://gitee.com/luowenjie98/vue-wechat-demo
 ![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172144945-638329693.png)
 
 #### 表情 文件 图片 消息
-![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624183335932-967852199.png)
+![image](https://user-images.githubusercontent.com/48705045/175520014-517656da-90f7-4e69-bdba-816262649a2f.png)
 
 #### 图片放大预览
 ![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172410733-1642329213.png)
@@ -42,10 +42,10 @@ gitee:  https://gitee.com/luowenjie98/vue-wechat-demo
 ![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172441516-1926363119.png)
 
 #### 信息弹出框
-![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172547193-1875862584.png)
+![image](https://user-images.githubusercontent.com/48705045/175520091-556e7986-521e-4f89-bb1a-92ecf1af9f17.png)
 
 ### 聊天列表右击菜单
-![image](https://img2022.cnblogs.com/blog/1556860/202206/1556860-20220624172825323-1247973661.png)
+![image](https://user-images.githubusercontent.com/48705045/175520113-93e09516-3807-4a43-a3a8-7165d6747a4a.png)
 
 
 

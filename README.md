@@ -1,7 +1,7 @@
 ## 一个模仿PC微信客户端的纯前端vue项目
 
-> 项目地址
-github:  https://github.com/TomHusky/vue-wechat-demo
+> 项目地址<br/>
+github:  https://github.com/TomHusky/vue-wechat-demo <br/>
 gitee:  https://gitee.com/luowenjie98/vue-wechat-demo
 
 

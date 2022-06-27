@@ -6,6 +6,9 @@ gitee:  https://gitee.com/luowenjie98/vue-wechat-demo
 
 
 
+****在线demo:**** https://tomhusky.github.io/vue-wechat-demo/
+
+
 目前已经完成的功能点有
 
 - 登录

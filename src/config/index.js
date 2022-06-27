@@ -4,6 +4,6 @@ module.exports = {
     //  本地环境发布目录
     dev: '/',
     //  生产环境发布目录
-    pro: '/vue-wechat-demo'
+    pro: '/vue-wechat-demo/'
   },
 }

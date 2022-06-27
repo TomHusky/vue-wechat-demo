@@ -16,7 +16,7 @@
           ></div>
           <div class="infoItem">
             <div class="item wxid">
-              <div class="lable" style="width: 50px">微信号:</div>
+              <div class="lable" style="width: 40px">微信号:</div>
               <div class="lable" style="margin-left: 5px">{{ user.wxid }}</div>
             </div>
           </div>
@@ -64,8 +64,15 @@
     >
       {{ user.signature }}
     </div>
-    <div class="button">
-      <img width="85px" height="35px" src="./headIcon.png" />
+    <div class="division"></div>
+    <div v-if="!isFriend && !isSelf" class="send">
+      <span>添加到通讯录</span>
+    </div>
+    <div v-if="isFriend" class="send" @click="send">
+      <span>发消息</span>
+    </div>
+    <div v-if="isSelf" class="send">
+      <span>发消息</span>
     </div>
   </div>
 </template>
@@ -97,12 +104,12 @@ export default {
       headMenu: (state) => state.system.headMenu,
     }),
     ...mapGetters({
-      getUser: "user/getUser",
       selectedFriendByUsername: "friend/selectedFriendByUsername",
+      getChatByChatId: "chat/getChatByChatId",
+      selectedChat: "chat/selectedChat",
     }),
     menuPosition() {
       let windowWidth = this.$store.state.system.windowWidth;
-      let windowHeight = this.$store.state.system.windowHeight;
       let position = {
         clientX: this.headMenu.clientX,
         clientY: this.headMenu.clientY,
@@ -110,13 +117,20 @@ export default {
       if (windowWidth - this.headMenu.clientX < 300) {
         position.clientX = this.headMenu.clientX - 300;
       }
-      // if (windowHeight - this.headMenu.clientY < 500) {
-      //   position.clientY = this.headMenu.clientY - 500;
-      // }
       return position;
     },
     user() {
       return this.headMenu.info;
+    },
+    isFriend() {
+      let friend = this.selectedFriendByUsername(this.headMenu.info.username);
+      return friend != null;
+    },
+    self() {
+      return this.$store.state.user.info;
+    },
+    isSelf() {
+      return this.headMenu.info.username === this.self.username;
     },
   },
   watch: {
@@ -169,17 +183,6 @@ export default {
       if (remark === this.user.remark) {
         return;
       }
-      let params = {
-        username: this.user.username,
-        remark: remark,
-      };
-      // updateFriendInfo(params).then((res) => {
-      //   if (res.code == 0) {
-      //     let friend = this.selectedFriendByUsername(this.user.username);
-      //     friend.remark = remark;
-      //     this.updateFriend(friend);
-      //   }
-      // });
     },
     updateSignature(event) {
       let signature = event.target.innerText.trim();
@@ -201,6 +204,48 @@ export default {
       //   }
       // });
     },
+    send() {
+      let selectUser = this.user;
+      let msg = this.getChatByChatId(selectUser.username);
+      if (this.selectedChat.chatId === selectUser.username) {
+        this.headMenu.visibleIng = false;
+        this.headMenu.visible = false;
+        return;
+      }
+      if (!msg) {
+        console.log(selectUser);
+        let friend = this.selectedFriendByUsername(selectUser.username);
+        console.log(friend);
+        this.$store.dispatch("friend/selectFriend", friend.username);
+        let chat = {
+          type: 1,
+          chatId: friend.username,
+          info: {
+            username: friend.username,
+            nickname: friend.nickname,
+            avatar: friend.avatar,
+            remark: friend.remark,
+            notDisturb: false,
+          },
+          newMsgNum: 0,
+          lastMsgTime: new Date(),
+          messages: [
+            {
+              type: 1,
+              content: "已经置顶聊天，可以给我发信息啦！",
+              date: new Date(),
+            },
+          ],
+        };
+        console.log(chat);
+        this.$store.dispatch("chat/topChat", chat);
+        this.$store.dispatch("chat/selectSession", friend.username);
+      } else {
+        this.$store.dispatch("chat/selectSession", msg.info.username);
+      }
+      this.headMenu.visibleIng = false;
+      this.headMenu.visible = false;
+    },
   },
 };
 </script>
@@ -219,13 +264,13 @@ export default {
   border-radius: 2px;
   font-weight: 400;
   color: #333;
-  width: 300px;
+  width: 280px;
   box-shadow: 2px 2px 10px #aaa;
   -o-box-shadow: 2px 2px 10px #aaa;
   -webkit-box-shadow: 2px 2px 10px #aaa;
   -moz-box-shadow: 2px 2px 10px #aaa;
   box-sizing: border-box;
-  padding: 30px;
+  padding: 25px 25px 0 25px;
 }
 
 .esInfo {
@@ -265,6 +310,7 @@ export default {
         display: -webkit-flex;
         display: fixed;
         align-items: flex-start;
+        font-size: 12px;
 
         div {
           width: 115px;
@@ -311,11 +357,20 @@ export default {
   }
 }
 
-.button {
-  margin-top: 15px;
+.send {
+  margin: 25px auto;
+  text-align: center;
+  width: 110px;
+  height: 34px;
+  line-height: 34px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #07C160;
+  cursor: pointer;
+  border-radius: 4px;
 
-  img {
-    float: right;
+  &:hover {
+    background: rgb(56, 205, 127);
   }
 }
 
